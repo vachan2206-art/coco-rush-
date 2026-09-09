@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Coco Rush - Login</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <div class="login-page">
+    <div class="login-hero">
+      <div class="login-icon">🥥</div>
+      <div class="login-brand">COCO RUSH</div>
+      <div class="login-tag">Sales Management System</div>
+    </div>
+
+    <div class="card login-card">
+      <h1 class="login-ttl">Welcome Back</h1>
+      <p class="login-sub">Sign in to your account</p>
+
+      <div id="err-msg" class="err-box"></div>
+
+      <form id="login-form" class="form-group gap20">
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input type="email" id="email" class="form-input" placeholder="Enter your email" required
+            autocapitalize="none">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <div class="pw-wrap">
+            <input type="password" id="password" class="form-input" placeholder="Enter your password" required>
+            <div id="toggle-pw" class="pw-eye">👁️‍🗨️</div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg mt12">Sign In</button>
+      </form>
+
+      <div class="hint-box">
+        Owner Demo: <strong>owner@cocorush.com</strong> / <strong>owner123</strong>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-wrap" class="toast-wrap"></div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
+</html>

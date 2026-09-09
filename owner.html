@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Owner Dashboard - Coco Rush</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+      /* Tab Nav */
+      .tabs { display:flex; border-bottom:1px solid var(--border); margin-bottom:20px; }
+      .tab { 
+          padding:12px 20px; font-size:14px; font-weight:600; color:var(--text-2); 
+          cursor:pointer; border-bottom:2px solid transparent; transition:var(--ease);
+      }
+      .tab:hover { color:var(--text-1); }
+      .tab.active { color:var(--green); border-bottom-color:var(--green); }
+      .tab-content { display:none; }
+      .tab-content.active { display:block; animation:fadeIn 0.3s ease; }
+  </style>
+</head>
+<body>
+
+  <header class="app-header">
+    <div class="app-header-inner">
+      <div class="logo">
+        <div class="logo-icon">👑</div>
+        <div>
+          <span class="logo-name">COCO RUSH</span>
+          <span class="logo-sub">Owner Portal</span>
+        </div>
+      </div>
+      <div class="header-right">
+        <span class="badge badge-live">LIVE REC</span>
+        <div class="user-badge" id="btn-signout" style="cursor:pointer; margin-left:10px;">
+          <div class="user-av" id="user-initial">O</div>
+          <span class="user-nm" id="user-name">Loading...</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-wrap">
+      
+      <div class="flex jcb aic mb20">
+          <input type="date" id="filter-date" class="form-input" style="max-width:180px;">
+      </div>
+      
+      <div class="tabs">
+          <div class="tab active" data-target="tab-dash">Dashboard</div>
+          <div class="tab" data-target="tab-feed">Live Feed</div>
+          <div class="tab" data-target="tab-team">Sales Team (<span id="t-count">0</span>)</div>
+          <div class="tab" data-target="tab-add">Add Salesman</div>
+      </div>
+      
+      <!-- TAB: DASHBOARD -->
+      <div id="tab-dash" class="tab-content active">
+          <div class="stats-grid s4 mb24">
+              <div class="stat-card green">
+                  <div class="stat-val" id="st-rev">₹0</div>
+                  <div class="stat-lbl">Total Revenue</div>
+              </div>
+              <div class="stat-card orange">
+                  <div class="stat-val" id="st-btl">0</div>
+                  <div class="stat-lbl">Bottles Sold</div>
+              </div>
+              <div class="stat-card gold">
+                  <div class="stat-val" id="st-act">0 / 0</div>
+                  <div class="stat-lbl">Active Salesmen</div>
+              </div>
+          </div>
+          
+          <div class="grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:20px;">
+              <!-- Left: Salesmen List -->
+              <div>
+                  <div class="sec-title"><div class="ico ico-green">🧑‍💼</div> Salesmen Overview</div>
+                  <div id="dash-salesmen-list" class="fc gap10">
+                      <!-- Injected via JS -->
+                  </div>
+              </div>
+              
+              <!-- Right: Flavour Breakdown -->
+              <div>
+                  <div class="sec-title"><div class="ico ico-pink">📊</div> Flavour Demographics</div>
+                  <div class="card card-p" id="dash-flavours">
+                      <!-- Injected via JS -->
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <!-- TAB: LIVE FEED -->
+      <div id="tab-feed" class="tab-content">
+          <div class="sec-title"><div class="ico ico-green">📺</div> Real-time Transaction Stream</div>
+          <div class="card card-p" style="max-height: 500px; overflow-y: auto;">
+              <div id="live-feed-list" class="fc gap8">
+                  <!-- Live updates injected here -->
+              </div>
+          </div>
+      </div>
+      
+      <!-- TAB: TEAM / DETAILS -->
+      <div id="tab-team" class="tab-content">
+          <div id="team-list" class="sm-grid mb20"></div>
+          
+          <div id="team-detail" style="display:none;">
+              <button class="btn btn-ghost btn-sm mb16" id="btn-back-team">← Back to List</button>
+              <div class="card card-p">
+                  <div class="detail-hd">
+                      <div class="detail-av" id="dt-av">S</div>
+                      <div>
+                          <h3 class="fs20 fw7" id="dt-name">Name</h3>
+                          <div class="c3 fs13" id="dt-email">email@...</div>
+                      </div>
+                  </div>
+                  <div class="stats-grid mb20">
+                      <div class="stat-card green"><div class="stat-val fs20" id="dt-rev">₹0</div><div class="stat-lbl">Revenue</div></div>
+                      <div class="stat-card orange"><div class="stat-val fs20" id="dt-btl">0</div><div class="stat-lbl">Bottles</div></div>
+                      <div class="stat-card gold"><div class="stat-val fs20" id="dt-ord">0</div><div class="stat-lbl">Orders</div></div>
+                  </div>
+                  <div class="sec-title"><div class="ico ico-pink">📋</div> Active Orders</div>
+                  <div id="dt-orders-list"></div>
+              </div>
+          </div>
+      </div>
+      
+      <!-- TAB: ADD SALESMAN -->
+      <div id="tab-add" class="tab-content">
+          <div class="card card-p" style="max-width:400px;">
+              <h3 class="fs16 fw7 mb16">Register New Salesman</h3>
+              <form id="form-add-salesman" class="fc gap14">
+                  <div class="form-group">
+                      <label class="form-label">Full Name</label>
+                      <input type="text" id="n-name" class="form-input" required>
+                  </div>
+                  <div class="form-group">
+                      <label class="form-label">Email (Login ID)</label>
+                      <input type="email" id="n-email" class="form-input" required autocapitalize="none">
+                  </div>
+                  <div class="form-group">
+                      <label class="form-label">Password</label>
+                      <input type="text" id="n-pass" class="form-input" required>
+                      <span class="fs11 c3 mt4">Make sure to share this password with the salesman.</span>
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-full mt12">Create Account</button>
+              </form>
+          </div>
+      </div>
+
+  </div> <!-- End page wrap -->
+
+  <div id="toast-wrap" class="toast-wrap"></div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/owner.js"></script>
+</body>
+</html>

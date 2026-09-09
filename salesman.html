@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Salesman Dashboard - Coco Rush</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header class="app-header">
+    <div class="app-header-inner">
+      <div class="logo">
+        <div class="logo-icon">🥥</div>
+        <div>
+          <span class="logo-name">COCO RUSH</span>
+          <span class="logo-sub">Salesman</span>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="user-badge" id="btn-signout" style="cursor:pointer">
+          <div class="user-av" id="user-initial">S</div>
+          <span class="user-nm" id="user-name">Loading...</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-wrap">
+    
+    <div class="tabs">
+      <div class="tab active" data-target="tab-today">Today's Sales</div>
+      <div class="tab" data-target="tab-history">My History</div>
+    </div>
+
+    <!-- TAB: TODAY -->
+    <div id="tab-today" class="tab-content active">
+        <!-- Today's Stats -->
+        <div class="page-section">
+          <div class="sec-title"><div class="ico ico-green">📊</div> Today's Summary</div>
+          <div class="stats-grid">
+            <div class="stat-card green">
+              <div class="stat-val" id="stat-revenue">₹0</div>
+              <div class="stat-lbl">Revenue</div>
+            </div>
+            <div class="stat-card orange">
+              <div class="stat-val" id="stat-bottles">0</div>
+              <div class="stat-lbl">Bottles</div>
+            </div>
+            <div class="stat-card gold">
+              <div class="stat-val" id="stat-orders">0</div>
+              <div class="stat-lbl">Orders</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Order -->
+        <div class="page-section">
+          <div class="sec-title"><div class="ico ico-orange">🛒</div> Add Order</div>
+          <div class="flavour-grid" id="flavour-grid"></div>
+        </div>
+        
+        <!-- Current Cart -->
+        <div class="page-section cart-section" id="cart-container" style="display:none;">
+          <div class="sec-title" style="margin-bottom:12px;"><div class="ico ico-gold">📝</div> Current Order</div>
+          <div id="cart-items" class="fc gap6 mb12"></div>
+          <div class="cart-total-row">
+              <span class="cart-total-lbl">Total Amount</span>
+              <span class="cart-total-amt" id="cart-total">₹0</span>
+          </div>
+          <div class="flex gap10 mt16">
+              <button class="btn btn-ghost btn-full" id="btn-clear-cart">Clear</button>
+              <button class="btn btn-primary btn-full" id="btn-confirm-order">Confirm Sale</button>
+          </div>
+        </div>
+
+        <!-- Recent Orders Log -->
+        <div class="page-section mt24">
+          <div class="sec-title"><div class="ico ico-pink">📋</div> Recent Orders</div>
+          <div id="orders-list"></div>
+        </div>
+    </div>
+
+    <!-- TAB: HISTORY -->
+    <div id="tab-history" class="tab-content">
+        <div class="page-section">
+            <div class="flex jcb aic mb16">
+                <div class="sec-title" style="margin-bottom:0;"><div class="ico ico-gold">📅</div> Past Sales</div>
+                <input type="date" id="hist-date" class="form-input" style="max-width:160px;">
+            </div>
+            <div id="hist-container">
+                <!-- History stats and orders injected here -->
+            </div>
+        </div>
+    </div>
+
+  </div> <!-- End page wrap -->
+  
+  <!-- Sign Out Modal (Daily Summary) -->
+  <div id="modal-signout" class="modal-bg hidden">
+    <div class="modal">
+      <h2 class="modal-title">End of Day Report</h2>
+      <div class="report-hero">
+          <div class="report-total" id="report-total">₹0</div>
+          <div class="report-sub">Total Revenue Today</div>
+      </div>
+      <div class="fc gap10 mb20" id="report-details">
+          <!-- Breakdown injected here -->
+      </div>
+      <p class="c2 fs12 tc mb20">Are you sure you want to sign out and end your shift?</p>
+      <div class="modal-actions">
+        <button class="btn btn-ghost btn-full" id="btn-cancel-signout">Cancel</button>
+        <button class="btn btn-danger btn-full" id="btn-confirm-signout">Sign Out</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-wrap" class="toast-wrap"></div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/salesman.js"></script>
+</body>
+</html>
